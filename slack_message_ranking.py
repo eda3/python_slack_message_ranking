@@ -1,10 +1,15 @@
 import json
+import re
 import os
 import unicodedata
 import sys
 
 
 def main():
+    # 引数チェック
+    args = sys.argv
+    check_args(args)
+
     work_dir = './export'
 
     # json ファイル読み込み
@@ -42,9 +47,8 @@ def main():
 
         check_date_count = 0
 
-        args = sys.argv
-        check_args(args)
-        last_month_list = get_date_list(args)
+        # last_month_list = get_date_list(args)
+        last_month_list = args
 
         # 先月分の各チャンネル書き込み数一覧を取得
         for file in files:
@@ -86,9 +90,16 @@ def main():
 
 
 def check_args(args):
+    # 引数は最低一つ必要
     if len(args) == 1:
         print('引数をyyyy-mm-ddで指定してください')
         sys.exit()
+
+    # 引数の形式はyyyy-mm-dd
+    pattern = r'\d{4}-/\d{1,2}-/\d{1,2}'
+    result = re.match(pattern, args[1])
+
+    print(result)
 
 
 if __name__ == '__main__':
