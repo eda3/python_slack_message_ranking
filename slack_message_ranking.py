@@ -9,17 +9,17 @@ def main():
     args = sys.argv
     check_args(args)
 
-    work_dir = './export'
+    work_dir = "./export"
 
     # json ファイル読み込み
-    with open(work_dir + '/' + 'channels.json') as f:
+    with open(work_dir + "/" + "channels.json") as f:
         channels_json = json.load(f)
 
     # アーカイブされたチャンネル一覧取得
     archived_channels = []
     for key in channels_json:
-        if key['is_archived']:
-            archived_channels.append(key['name'])
+        if key["is_archived"]:
+            archived_channels.append(key["name"])
 
     # =======================================================================
     # エクスポートデータから、チャンネル名、最終更新日付、書き込み数を取得
@@ -41,8 +41,8 @@ def main():
             continue
 
         # チャンネル名と最終書き込み日を取得
-        channel_name = '#' + channel_name
-        last_write_date = str(files[-1]).replace('.json', '')
+        channel_name = "#" + channel_name
+        last_write_date = str(files[-1]).replace(".json", "")
 
         check_date_count = 0
 
@@ -54,9 +54,9 @@ def main():
             # 先月分のファイルのみチェックする
             for last_month in last_month_list:
                 if last_month in file:
-                    # 'twitter' と'rss'が含まれるファイルは除外
-                    if not ('rss' in channel_name or
-                            'twitter' in channel_name):
+                    # "twitter" と"rss"が含まれるファイルは除外
+                    if not ("rss" in channel_name or
+                            "twitter" in channel_name):
                         with open(root + os.sep + file) as f:
                             channel_file = json.load(f)
                             check_date_count += len(channel_file)
@@ -91,9 +91,9 @@ def main():
 def check_args(args):
     # 引数は最低一つ必要
     if len(args) == 1:
-        print('引数をyyyy-mm-ddで指定してください')
+        print("引数をyyyy-mm-ddで指定してください")
         sys.exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
