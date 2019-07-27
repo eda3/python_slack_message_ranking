@@ -1,5 +1,4 @@
 import json
-import re
 import os
 import unicodedata
 import sys
@@ -94,12 +93,6 @@ def check_args(args):
     if len(args) == 1:
         print('引数をyyyy-mm-ddで指定してください')
         sys.exit()
-
-    # 引数の形式はyyyy-mm-dd
-    pattern = r'\d{4}-/\d{1,2}-/\d{1,2}'
-    result = re.match(pattern, args[1])
-
-    print(result)
 
 
 if __name__ == '__main__':
