@@ -9,7 +9,8 @@ from typing import Tuple
 def main() -> None:
     # 引数チェック
     args: List[str] = sys.argv
-    check_args(args)
+    if not check_args(args):
+        sys.exit()
 
     work_dir: str = "./export"
 
@@ -82,11 +83,11 @@ def main() -> None:
         print(str(rank).zfill(2), f[0], f[2])
 
 
-def check_args(args: list) -> None:
+def check_args(args: list) -> bool:
     # 引数は最低一つ必要
     if len(args) == 1:
         print("引数をyyyy-mm-ddで指定してください")
-        sys.exit()
+        return False
 
 
 def get_archived_channels(channels_json: List[dict]) -> List[dict]:
