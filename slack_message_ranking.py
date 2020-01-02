@@ -53,12 +53,9 @@ def main() -> None:
             # 先月分のファイルのみチェックする
             for last_month in last_month_list:
                 if last_month in file:
-                    # "twitter" と"rss"が含まれるファイルは除外
-                    if not ("rss" in channel_name or
-                            "twitter" in channel_name):
-                        with open(root + os.sep + file) as f:
-                            channel_file: List[dict] = json.load(f)
-                            check_date_count += len(channel_file)
+                    with open(root + os.sep + file) as f:
+                        channel_file: List[dict] = json.load(f)
+                        check_date_count += len(channel_file)
 
         # 各取得データを配列に格納
         result_channels += [(channel_name, last_write_date, check_date_count)]
