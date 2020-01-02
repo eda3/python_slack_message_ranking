@@ -61,13 +61,11 @@ def main() -> None:
         result_channels += [(channel_name, last_write_date, check_date_count)]
         # result_channels += [[channel_name, last_write_date]]
 
-    """
     # チャンネルを最終更新日順にソート
     result_channels.sort(key=lambda x: x[1])
-    for f in result_channels:
-        print(f[0],f[1])
+    for f in result_channels:  # type: List[str]
+        print(f[0], f[1])
 
-    # """
     # チャンネル名を勢い順にソート
     result_channels.sort(key=lambda x: x[2], reverse=True)
 
