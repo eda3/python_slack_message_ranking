@@ -88,6 +88,7 @@ def check_args(args: list) -> bool:
     if len(args) == 1:
         print("引数をyyyy-mm-ddで指定してください")
         return False
+    return True
 
 
 def get_archived_channels(channels_json: List[dict]) -> List[dict]:
