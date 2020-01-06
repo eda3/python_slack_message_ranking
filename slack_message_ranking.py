@@ -49,9 +49,9 @@ def main() -> None:
         # last_month_list = get_date_list(args)
         last_month_list: List[str] = args
 
-        # 先月分の各チャンネル書き込み数一覧を取得
+        # 各チャンネル書き込み数一覧を取得
         for file in files:
-            # 先月分のファイルのみチェックする
+            # ファイルのみチェックする
             for last_month in last_month_list:
                 if last_month in file:
                     with open(root + os.sep + file) as f:
@@ -73,7 +73,7 @@ def main() -> None:
     rank: int = 0
     pre_channel: int = 0
     for f in result_channels:
-        # 書き込みは表示しない
+        # 書き込みゼロは表示しない
         if f[2] == 0:
             continue
 
