@@ -1,3 +1,4 @@
+# import argparse
 import json
 import os
 import sys
@@ -8,7 +9,13 @@ from typing import List, Tuple
 def main() -> None:
     # 引数チェック
     args: List[str] = sys.argv
+
+    # 引数パーサを作成
+    # s: str = "Slackの全メッセージをエクスポートしたデータをランキング順 or 最終書き込み日順に表示する"
+    # parser = argparse.ArgumentParser(description=s)
+
     if not check_args(args):
+        print("### 引数のチェックに問題があったため処理を終了します")
         sys.exit()
 
     work_dir: str = "./export"
