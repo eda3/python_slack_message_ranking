@@ -2,8 +2,7 @@ import json
 import os
 import sys
 import unicodedata
-from typing import List
-from typing import Tuple
+from typing import List, Tuple
 
 
 def main() -> None:
@@ -30,7 +29,7 @@ def main() -> None:
 
         # Macの場合、ディレクトリ名がNFD形式であるため変換を行う
         # 参考：http://r9.hateblo.jp/entry/2015/05/11/233000
-        channel_name: str = unicodedata.normalize("NFC", channel_name)
+        channel_name = unicodedata.normalize("NFC", channel_name)
 
         # 走査の対象から、トップディレクトリとアーカイブチャンネルを除く
         if channel_name in archived_channels or len(dirs) != 0:
@@ -41,7 +40,7 @@ def main() -> None:
             continue
 
         # チャンネル名と最終書き込み日を取得
-        channel_name: str = "#" + channel_name
+        channel_name = "#" + channel_name
         last_write_date: str = str(files[-1]).replace(".json", "")
 
         check_date_count: int = 0
@@ -63,24 +62,24 @@ def main() -> None:
         # result_channels += [[channel_name, last_write_date]]
 
     # チャンネルを最終更新日順にソート
-    result_channels.sort(key=lambda x: x[1])
-    for f in result_channels:  # type: List[str]
-        print(f[0], f[1])
+    result_channels.sort(key=lambda x:x[1])
+    for result in result_channels:  # type: Tuple[str, str, int]
+        print(result[0], result[1])
 
     # チャンネル名を勢い順にソート
     result_channels.sort(key=lambda x: x[2], reverse=True)
 
     rank: int = 0
     pre_channel: int = 0
-    for f in result_channels:
+    for result in result_channels:
         # 書き込みゼロは表示しない
-        if f[2] == 0:
+        if result[2] == 0:
             continue
 
-        if f[2] != pre_channel:
+        if result[2] != pre_channel:
             rank += 1
-            pre_channel = f[2]
-        print(str(rank).zfill(2), f[0], f[2])
+            pre_channel = result[2]
+        print(str(rank).zfill(2), result[0], result[2])
 
 
 def check_args(args: list) -> bool:
